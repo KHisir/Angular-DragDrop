@@ -1,0 +1,23 @@
+<div class="drag-container">
+  <div class="drop-zone" [ngClass]="itemOnDropZone === true ? 'animation' : ''" (dragover)="dragOver($event)" (drop)="drop($event)" (dragenter)="dragEnter($event)" (dragleave)="dragLeave($event)" dropzone>
+    <div *ngFor="let item of dropped"
+      class="dropped-item"
+      [style.background-color]="item.color"
+    >
+      {{ item.text }}
+    </div>
+    <h4 id="info" *ngIf="dropped.length === 0">Drop here!</h4>
+  </div>
+  <div *ngFor="let item of draggable"
+    class="draggable-item"
+    [ngClass]="item.dragStarted === true ? 'animation' : ''"
+    [style.left]="item.left+'px'"
+    [style.top]="item.top+'px'"
+    [style.background-color]="item.color"
+    draggable="true"
+    (dragstart)="dragStart($event, item)"
+    (dragend)="dragEnd($event, item)"
+  >
+    {{ item.text }}
+  </div>
+</div>
